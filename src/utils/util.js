@@ -137,7 +137,7 @@ function  generateChildRouters (data) {
     // }else if(item.component=="modules/online/cgreport/auto/OnlCgreportAutoList"){
     //   componentPath = onlineCommons.OnlCgreportAutoList
     // }else{
-    //   componentPath = resolve => require(['@/' + component+'.vue'], resolve)
+      componentPath = resolve => require(['@/' + component+'.vue'], resolve)
     // }
 
     let menu =  {
