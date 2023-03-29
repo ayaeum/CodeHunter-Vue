@@ -12,8 +12,8 @@ import { VueAxios } from "@/utils/request"
 import './assets/logo.png'
 import '../public/cdn/babel-polyfill/polyfill_7_2_5'
 
-require('@jeecg/antd-online-mini')
-require('@jeecg/antd-online-mini/dist/OnlineForm.css')
+// require('@jeecg/antd-online-mini')
+// require('@jeecg/antd-online-mini/dist/OnlineForm.css')
 
 import Antd, { version } from 'ant-design-vue'
 console.log('ant-design-vue version:', version)
