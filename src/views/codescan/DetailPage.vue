@@ -17,7 +17,7 @@
         <FileFilter ref="FileFilter" style="position: absolute;" :tree-data="taskNow" :visible="FileFilterVisible" @FileFilterOk="FileFilterOk" @FileFilterCancel="FileFilterCancel"></FileFilter>
 
         <a-button type="primary" style="position: relative;margin-right: 5px;" v-on:click="showScanScheme">扫描方案</a-button>
-        <ScanScheme :visible="ScanSchemeVisible" @ScanSchemeOk="ScanSchemeOk" @ScanSchemeCancel="ScanSchemeCancel"></ScanScheme>
+        <ScanScheme ref="ScanScheme" :visible="ScanSchemeVisible" @ScanSchemeOk="ScanSchemeOk" @ScanSchemeCancel="ScanSchemeCancel"></ScanScheme>
 
         <a-button type="primary" style="position: relative;margin-right: 15px;" v-on:click="StartScan">启动扫描</a-button>
       </div>
@@ -106,13 +106,10 @@
         SelectDialogOk(e){
           this.SelectDialogVisible = false;
           this.valuecarry=this.value;
-          //更新缓存中的当前任务信息
-          //首先找到任务
           var that=this;
           this.TaskList.some(item=>{
             if(item.id===that.value){
-              //更新缓存
-              that.$store.commit("updatetask",item);
+              that.$store.commit("updatetask",item);//更新缓存
               sessionStorage.setItem("task",JSON.stringify(this.$store.state.task))
               that.taskNow=item;
               return true;
@@ -133,7 +130,6 @@
           this.ScanHistoryVisible = true;
         },
         ScanHistoryOk(e){
-          // console.log(e);
           this.ScanHistoryVisible = false;
           this.$message.success('扫描历史切换成功');
         },
@@ -145,7 +141,6 @@
         //文件过滤按钮
         showFileFilter(){
           this.FileFilterVisible = true;
-
         },
         FileFilterOk(e){
           // console.log(e);
@@ -161,11 +156,9 @@
           this.ScanSchemeVisible = true;
         },
         ScanSchemeOk(e){
-          // console.log(e);
           this.ScanSchemeVisible = false;
         },
         ScanSchemeCancel(e){
-          // this.value=this.valuecarry;
           this.ScanSchemeVisible = false;
         },
 
@@ -180,7 +173,19 @@
 
         //启动扫描按钮
         StartScan(){
-          this.$refs.Tabs.ScanStart();
+          var flag=0;
+          console.log(this.$refs.ScanScheme.check)
+          for(let item in this.$refs.ScanScheme.check){
+            if(this.$refs.ScanScheme.check[item].checked===true){
+              flag=1;
+            }
+          }
+          if(flag===0){
+            this.$message.info("您未开启任何检测项目");
+          }else{
+            this.$refs.Tabs.ScanStart();
+          }
+
         },
       },
     }

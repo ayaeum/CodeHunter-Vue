@@ -173,10 +173,7 @@
 
           loadScanData1(content,pos){
             var that=this;
-            //content里包含了三个文件的内容
             content.some(item=>{
-              //接下来要
-
               //total
               for(let key in item.result){
                 switch (item.result[key].level) {
@@ -202,8 +199,6 @@
             that.datasource2[pos].warn=0;
             that.datasource2[pos].propose=0;
             content.some(item=>{
-              //total
-              //serious warn propose
               for(let key in item.result){
                 switch (item.result[key].level) {
                   case "严重":

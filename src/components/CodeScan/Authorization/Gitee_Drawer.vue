@@ -8,7 +8,7 @@
                 v-decorator="[
                     'identificationName',
                     {
-                      rules: [{ required: true, message: 'please enter identificationName' }],
+                      rules: [{ required: true, message: '请输入标识名称' }],
                     },
                   ]"
                 style="width: 100%"
@@ -25,7 +25,7 @@
                 v-decorator="[
                     'email',
                     {
-                      rules: [{ required: true, message: 'Please enter user email' }],
+                      rules: [{ required: true, message: '请输入邮箱' }],
                     },
                   ]"
                 placeholder="请输入绑定的邮箱"
@@ -39,7 +39,7 @@
                 v-decorator="[
                     'password',
                     {
-                      rules: [{ required: true, message: 'please enter password' }],
+                      rules: [{ required: true, message: '请输入密码' }],
                     },
                   ]"
                 style="width: 100%"
@@ -56,7 +56,7 @@
                 v-decorator="[
                     'Client_ID',
                     {
-                      rules: [{ required: true, message: 'please enter Client ID' }],
+                      rules: [{ required: true, message: '请输入 Client ID' }],
                     },
                   ]"
                 style="width: 100%"
@@ -73,7 +73,7 @@
                 v-decorator="[
                     'Client_Secret',
                     {
-                      rules: [{ required: true, message: 'please enter Client Secret' }],
+                      rules: [{ required: true, message: '请输入 Client Secret' }],
                     },
                   ]"
                 style="width: 100%"
@@ -90,7 +90,7 @@
                 v-decorator="[
                     'description',
                     {
-                      rules: [{ required: true, message: 'Please enter description' }],
+                      rules: [{ required: true, message: '请输入备注' }],
                     },
                   ]"
                 :rows="4"
@@ -105,7 +105,6 @@
 
 <script>
   import {getAction} from '@/api/manage'
-  // import {RSAMixin} from "../../mixins/RSAMixin";
   import {RSAMixin} from "@/mixins/RSAMixin"
     export default {
       name: "Gitee_Drawer",
@@ -125,23 +124,34 @@
            * 提交表单，创建新的认证
            */
           onSubmit(){
-            var url = "/certificationManagementForm/addCertification";
-            var parameter = {
-              sysUsername:JSON.parse(localStorage.getItem("pro__Login_Username")).value,
-              giteeAccount:this.form.fieldsStore.fields.email.value,
-              giteePassword:this.encryptedData(this.$store.state.publicKey,this.form.fieldsStore.fields.password.value),
-              clientId:this.form.fieldsStore.fields.Client_ID.value,
-              clientSecret:this.form.fieldsStore.fields.Client_Secret.value,
-              remarks:this.form.fieldsStore.fields.description.value,
-              identificationName:this.form.fieldsStore.fields.identificationName.value,
-              platform:"Gitee",
-            }
-            getAction(url,parameter).then((res) => {
-              if(res.message === "添加成功"){
-                this.$emit("change",res.result);
-                this.form = this.$form.createForm(this);
+
+            // var url = "/certificationManagementForm/addCertification";
+            // var parameter = {
+            //   sysUsername:JSON.parse(localStorage.getItem("pro__Login_Username")).value,
+            //   giteeAccount:this.form.fieldsStore.fields.email.value,
+            //   giteePassword:this.encryptedData(this.$store.state.publicKey,this.form.fieldsStore.fields.password.value),
+            //   clientId:this.form.fieldsStore.fields.Client_ID.value,
+            //   clientSecret:this.form.fieldsStore.fields.Client_Secret.value,
+            //   remarks:this.form.fieldsStore.fields.description.value,
+            //   identificationName:this.form.fieldsStore.fields.identificationName.value,
+            //   platform:"Gitee",
+            // }
+            // getAction(url,parameter).then((res) => {
+            //   if(res.message === "添加成功"){
+            //     this.$emit("change",res.result);
+            //     this.form = this.$form.createForm(this);
+            //   }
+            // })
+          },
+
+          check() {//字段检查
+            var res="false";
+            this.form.validateFields(err => {
+              if (!err) {
+                res="true";
               }
-            })
+            });
+            return res;
           },
         }
     }

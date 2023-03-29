@@ -11,7 +11,7 @@
     <div class="copyright">
       Copyright
       <a-icon type="copyright"/>
-      2022 <span>CodeHunter 出品</span>
+      2022 <span>Insoft Lab出品</span>
     </div>
   </div>
 </template>

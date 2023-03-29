@@ -9,7 +9,7 @@
 <!--        <a slot="actions" v-on:click="Look(item)">查看</a>-->
         <a slot="actions" v-on:click="ignoreQuestion(item)">忽略</a>
         <a-list-item-meta
-          :description= "'缺陷倾向概率：'+item.result.prob"
+          :description= "'缺陷倾向概率：'+ ((parseFloat(item.result.prob)*100).toString()).substring(0,4)+'%'"
         >
           <a slot="title">{{ item.filename}}</a>
         </a-list-item-meta>
@@ -34,26 +34,31 @@
       },
       created() {
         var that=this;
-        this.loadScanResult();
+        this.loadScanCurResult(1);
+        this.$EventBus.$on('loadScanDefectResult', (order)=>{
+          that.loadScanCurResult(order);//调用加载方法
+        })
       },
 
       methods:{
-        loadScanResult(){//加载扫描结果
-          var url = "/taskScanResult/queryAllTaskResults"//直接去后台加载数据更合适
+        loadScanCurResult(order){//加载最近一次的扫描结果
+          var url = "/taskScanResult/queryCurrentTaskResult"
           var parameter = {
             id:JSON.parse(sessionStorage.getItem("task")).id,
+            order:order,
           }
           getAction(url,parameter).then((res) => {
-            this.resultList=JSON.parse(res.result[res.result.length-1].defectresult);
+            if(res.result!==null){
+              this.resultList=JSON.parse(res.result.defectresult);
+            }
           })
         },
 
         ignoreQuestion(){//忽略问题
           this.$message.success('好好改bug吧，别想着偷懒。');
         },
-        //查看问题
-        Look(item1){
-          console.log(item1)
+
+        Look(item1){//查看问题
           this.drawervisible=true;
           this.questionmessage = item1;
         },

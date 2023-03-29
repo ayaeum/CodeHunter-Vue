@@ -246,18 +246,30 @@
 
             onSubmit(){
               if(this.Gitee_Drawer === true){
+                if(this.$refs.Gitee_Drawer.check()==="false"){
+                  this.$message.info("存在空字段")
+                  return;
+                }
                 this.Gitee_Drawer = false;
                 this.visible = false;
                 this.$refs.Gitee_Drawer.onSubmit();
               }
 
               if(this.GitLab_Drawer === true){
+                if(this.$refs.GitLab_Drawer.check()==="false"){
+                  this.$message.info("存在空字段")
+                  return;
+                }
                 this.GitLab_Drawer = false;
                 this.visible = false;
                 this.$refs.GitLab_Drawer.onSubmit();
               }
 
               if(this.GitHub_Drawer === true){
+                if(this.$refs.GitHub_Drawer.check()==="false"){
+                  this.$message.info("存在空字段")
+                  return;
+                }
                 this.GitHub_Drawer = false;
                 this.visible = false;
                 this.$refs.GitHub_Drawer.onSubmit();
@@ -353,8 +365,8 @@
 
 <style scoped>
   .Top_Div{
-    width: 1680px;
-    height: 840px;
+    width: 100%;
+    min-height: 1000px;
     border: solid 1px #DDDDDD;
     background-color: white;
     overflow: auto;

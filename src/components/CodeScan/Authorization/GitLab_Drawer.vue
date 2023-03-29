@@ -111,6 +111,15 @@
         })
       },
 
+      check() {//字段检查
+        var res="false";
+        this.form.validateFields(err => {
+          if (!err) {
+            res="true";
+          }
+        });
+        return res;
+      },
     }
   }
 </script>

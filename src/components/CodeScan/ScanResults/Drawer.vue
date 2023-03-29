@@ -34,7 +34,7 @@
             <p :style="{'color':item.color}">&nbsp;&nbsp;级别：【{{item.level}}】</p>
             <br/>
             <div v-for="item1 in item.result">
-              <p style="padding: 0;margin-bottom: 5px;">【位置】{{item1.questionableLine}}</p>
+              <p style="padding: 0;margin-bottom: 5px;">【所在行数】{{item1.questionableLine}}</p>
               <p style="padding: 0;margin-bottom: 5px;">【错误代码】{{item1.text}}</p>
               <template style="position:relative;">
                 <a-textarea :disabled="true" style="background-color: #F0F2F5;color: black;overflow-y: hidden;overflow-x: scroll;" :rows="5"

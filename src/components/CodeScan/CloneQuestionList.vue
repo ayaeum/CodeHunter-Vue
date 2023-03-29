@@ -29,35 +29,35 @@
       data(){
           return{
             drawervisible:false,
-            resultList: [
-            ],
+            resultList: [],
             questionmessage:{},
           }
         },
       created() {
-        var that=this;
-        this.loadScanResult();
-        this.$EventBus.$on('loadScanCloneResult', ()=>{
-          that.loadScanResult();
+        this.loadScanCurResult(1);
+        this.$EventBus.$on('loadScanCloneResult', (order)=>{
+          this.loadScanCurResult(order);
         })
       },
       methods:{
-        loadScanResult(){//加载扫描结果
-          var url = "/taskScanResult/queryAllTaskResults"//直接去后台加载数据更合适
+        loadScanCurResult(order){//加载扫描结果
+          var url = "/taskScanResult/queryCurrentTaskResult"
           var parameter = {
             id:JSON.parse(sessionStorage.getItem("task")).id,
+            order:order,
           }
           getAction(url,parameter).then((res) => {
-            this.resultList=JSON.parse(res.result[res.result.length-1].cloneresult);
+            if(res.result!==null&&JSON.parse(res.result.cloneresult).length!==0){
+              this.resultList=JSON.parse(res.result.cloneresult);
+            }
           })
         },
 
         ignoreQuestion(){//忽略问题
           this.$message.success('好好改bug吧，别想着偷懒。');
         },
-        //查看问题
-        Look(item1){
-          console.log(item1)
+
+        Look(item1){//查看问题
           this.drawervisible=true;
           this.questionmessage = item1;
         },

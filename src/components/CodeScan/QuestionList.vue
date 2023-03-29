@@ -25,7 +25,7 @@
         <a slot="actions" v-on:click="Look(item)">查看</a>
         <a slot="actions" v-on:click="ignoreQuestion(item)">忽略</a>
         <a-list-item-meta
-          :description= "'共发现'+item.result.length+'处问题'"
+          :description= "'共发现'+item.length+'处问题'"
         >
           <a slot="title">{{ item.filename}}</a>
         </a-list-item-meta>
@@ -62,24 +62,33 @@
         var that=this;
         this.questionmessage=this.resultList[0];
         this.loadScanResult(1);
-
-        this.$EventBus.$on('loadScanResult', (id)=>{
-          //调用加载方法
-          that.loadScanResult(id);
+        this.$EventBus.$on('loadScanResult', (order)=>{
+          that.loadScanResult(order);//调用加载方法
         })
       },
       methods:{
+        accumulation(){
+          this.resultList.forEach(item=>{
+            var length=0;
+            for(let i in item.result){
+              length+=item.result[i].result.length;
+            }
+            item.length=length;
+          })
+        },
+
         //加载扫描结果
-        loadScanResult(id){
+        loadScanResult(order){
           var url = "/taskScanResult/queryCurrentTaskResult"
           var parameter = {
             id:JSON.parse(sessionStorage.getItem("task")).id,
-            order:id,
+            order:order,
           }
           getAction(url,parameter).then((res) => {
             if(res.result!==null){
               this.resultList=JSON.parse(res.result.javaruleresult);
             }
+            this.accumulation()
           })
         },
 
@@ -111,10 +120,11 @@
             this.resultList=res.result;//加载数据
             this.$emit("loadScanData",res.result);
             setTimeout(() => {
-              this.$EventBus.$emit('loadScanCloneResult');
+              this.$EventBus.$emit('loadScanResult',1);
+              this.$EventBus.$emit('loadScanCloneResult',1);
+              this.$EventBus.$emit("loadScanDefectResult",1);
               this.$EventBus.$emit('loadScanHistry', 1);
             }, 1000)
-
           })
 
           //查询结果
@@ -127,6 +137,7 @@
               if(res.success!==false){
                 if(res.result.process1==="100"){
                   that.content=res.result.status;
+                  that.progress1=parseInt(res.result.process);
                   that.progress2=parseInt(res.result.process1);
                   that.modalFooter=true;
                   clearInterval(setInt);
@@ -141,7 +152,7 @@
               const textarea = document.getElementById('scroll_text');
               textarea.scrollTop = textarea.scrollHeight;
             })
-        }, 500);//500毫秒刷新一次
+        }, 300);//500毫秒刷新一次
 
         },
       }
@@ -149,9 +160,12 @@
 </script>
 
 <style scoped>
+  html,body{height:100%;}
+
   .Top_Div1{
     background-color: white;
     position: relative;
+    width: 100%;
   }
 
   .demo-loadmore-list {

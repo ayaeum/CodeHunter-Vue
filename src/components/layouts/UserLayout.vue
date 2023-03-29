@@ -21,13 +21,13 @@
 <!--          <a href="https://github.com/zhangdaiscott/jeecg-boot" target="_blank">隐私</a>-->
 <!--          <a href="https://github.com/zhangdaiscott/jeecg-boot/blob/master/LICENSE" target="_blank">条款</a>-->
 
-          <a target="_blank">帮助</a>
-          <a target="_blank">隐私</a>
-          <a target="_blank">条款</a>
+<!--          <a target="_blank">帮助</a>-->
+<!--          <a target="_blank">隐私</a>-->
+<!--          <a target="_blank">条款</a>-->
         </div>
         <div class="copyright">
 <!--          Copyright &copy; 2022 <a href="http://www.jeecg.com" target="_blank">CodeHunter</a> 出品-->
-          Copyright &copy; 2022 <a target="_blank">CodeHunter</a> 出品
+          Copyright &copy; 2022 <a target="_blank">Insoft Lab</a> 出品
         </div>
       </div>
     </div>

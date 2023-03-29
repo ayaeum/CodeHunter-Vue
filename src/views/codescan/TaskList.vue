@@ -226,7 +226,6 @@
             jeecg_account:JSON.parse(localStorage.getItem("pro__Login_Username")).value,
           }
           getAction(url,parameter).then((res) => {
-            // console.log(res)
             this.ownerList = res.result;
           })
         })
@@ -268,12 +267,9 @@
       clickCard(e){
         // this.$store.commit('receive',{title:e.taskName,taskName:e.taskName,path:e.path,owner:e.repoowner,branch:e.branch,language:e.language,wareHouse:e.wareHouse,recursive:"1",platform:e.platform});
         // sessionStorage.setItem("store", JSON.stringify(this.$store.state));
-        console.log(e)
         this.$store.commit('updatetask',e)
         sessionStorage.setItem("task", JSON.stringify(this.$store.state.task));
-
-        //跳转到扫描结果页面
-        this.$router.push({name:'DetailPage'});
+        this.$router.push({name:'DetailPage'});//跳转到扫描结果页面
       },
 
       showDrawer() {
@@ -285,7 +281,10 @@
       },
 
       onSubmit(){
-        var that=this;
+        if(this.check()==="false"){
+          this.$message.info("存在空字段");
+          return;
+        }
         this.spinning=true;
         var url = "/taskManagementTable/insertTask"
         var parameter = {
@@ -342,18 +341,30 @@
       },
 
       handleCancel(e) {
-        // console.log(e);
         this.delete_dialogvisible = false;
+      },
+
+      check() {//字段检查
+        var res="false";
+        this.form.validateFields(err => {
+          if (!err) {
+            res="true";
+          }
+        });
+        return res;
       },
     }
   }
 </script>
 
 <style scoped>
+  html,body{height:100%;}
+
   .Top_div{
     position: relative;
-    width: 1680px;
-    height:840px;
+    width: 100%;
+    height:100%;
+    min-height: 1000px;
     background-color: white;
     overflow: auto;
   }
