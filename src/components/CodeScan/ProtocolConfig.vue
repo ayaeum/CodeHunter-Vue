@@ -7,21 +7,30 @@
             <a-list-item-meta :description="item.context">
               <a slot="title" style="display: inline-block;width: 100%;position:relative;">
                 {{item.id}}.{{ item.rule }}
+                <a-popover placement="topLeft">
+                  <template slot="content" style="">
+                    <div style="color: red;width: 500px;">错例：</div>
+                    <a-textarea :disabled="true" style="background-color: #FFF5A7;color: black;overflow-y: hidden;overflow-x: scroll;" :rows="item.example.split('\n').length+2"
+                                :value="item.example" />
+                  </template>
+<!--                  <span slot="title">规约示例</span>-->
+                  <a-icon type="question-circle" style="margin-left: 1%;display: inline-block;" />
+                </a-popover>
                   <a-select
                     label-in-value
                     size="small"
                     :default-value="{ key: item.remark }"
                     style="position:absolute;display: inline-block;right: 3%;"
-                    @change="handleChange($event,item.id)"
+                    @change="handleChange1($event,item.id)"
                   >
                     <a-select-option value="deadly">
-                      严重
+                      强制
                     </a-select-option>
                     <a-select-option value="warning">
                       警告
                     </a-select-option>
                     <a-select-option value="proposal">
-                      建议
+                      推荐
                     </a-select-option>
                     <a-select-option value="common">
                       取消
@@ -37,7 +46,7 @@
 </template>
 
 <script>
-  import {getAction} from '@/api/manage';
+  import {getAction,postAction} from '@/api/manage';
   export default{
     name: "ProtocolConfig",
     props:["title","visible"],
@@ -154,6 +163,25 @@
         getAction(url,parameter).then((res) => {
           //TODO 提示与更新操作
           // console.log(res);
+          this.$message.success('配置更新成功');
+        })
+      },
+
+      handleChange1(e,id) {
+        this.listData.some(item=>{
+          if(item.id === id){
+            item.remark=e.label.replaceAll("\n","").replaceAll(" ","");
+            return true;
+          }
+        })
+        var url = "/taskScanningScheme/updateTaskScanSchema"
+        var parameter = {
+          taskId:JSON.parse(sessionStorage.getItem("task")).id,
+          configList:JSON.stringify(this.listData),
+        }
+        postAction(url,parameter).then((res) => {
+          //TODO 提示与更新操作
+          console.log(res);
           this.$message.success('配置更新成功');
         })
       },

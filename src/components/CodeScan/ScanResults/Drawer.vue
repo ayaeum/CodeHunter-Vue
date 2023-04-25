@@ -15,12 +15,12 @@
         </a-descriptions>
         <a-descriptions>
           <a-descriptions-item label="共计问题">
-            {{content.result.length}}
+            {{content.length}}
           </a-descriptions-item>
         </a-descriptions>
         <a-descriptions>
           <a-descriptions-item label="文件路径">
-            {{content.filename}}
+            ./{{content.filename}}
           </a-descriptions-item>
         </a-descriptions>
         <br/>
@@ -28,21 +28,18 @@
         <!--详细问题展示-->
         <a-collapse v-for="(item,index) in content.result" :key="index" default-active-key="1" :bordered="false">
           <template #expandIcon="props">
-              <a-icon type="caret-right" :rotate="props.isActive ? 90 : 0" />
+              <a-icon type="caret-right" :style="{'color':item.color}" :rotate="props.isActive ? 90 : 0" />
           </template>
-          <a-collapse-panel  :header="'【'+item.level+'】'+item.rule" class="panel">
+<!--          <p :style="{'color':item.color,'position':'absolute','top':'10px;','margin-left':'40px'}">【{{item.level}}:{{item.result.length}}处】{{item.rule}}</p>-->
+          <a-collapse-panel class="panel"  :header="'【'+item.level+':  '+item.result.length+'处】'+item.rule">
             <p :style="{'color':item.color}">&nbsp;&nbsp;级别：【{{item.level}}】</p>
             <br/>
             <div v-for="item1 in item.result">
               <p style="padding: 0;margin-bottom: 5px;">【所在行数】{{item1.questionableLine}}</p>
               <p style="padding: 0;margin-bottom: 5px;">【错误代码】{{item1.text}}</p>
               <template style="position:relative;">
-                <a-textarea :disabled="true" style="background-color: #F0F2F5;color: black;overflow-y: hidden;overflow-x: scroll;" :rows="5"
-                            :value="(item1.questionableLine-2)+'   '+content.code.split('\n')[item1.questionableLine-3]+'\n'
-                        +(item1.questionableLine-1)+'   '+content.code.split('\n')[item1.questionableLine-2]+'\n'
-                        +item1.questionableLine+'   '+content.code.split('\n')[item1.questionableLine-1]+'\n'
-                        +(item1.questionableLine+1)+'   '+content.code.split('\n')[item1.questionableLine]+'\n'
-                        +(item1.questionableLine+2)+'   '+content.code.split('\n')[item1.questionableLine+1]" />
+                <a-textarea :disabled="true" style="background-color: #F0F2F5;color: black;overflow-y: hidden;overflow-x: scroll;" :rows="item1.errorCode.split('\n').length+2"
+                            :value="item1.errorCode" />
               </template>
               <br/><br/><br/>
             </div>
@@ -142,7 +139,7 @@
 </script>
 
 <style scoped>
-.panel{
+  .panel{
   background: #f7f7f7;
   border-radius: 4px;
   margin-bottom: 24px;
@@ -154,7 +151,4 @@
 /*  color: red;*/
 /*}*/
 
-.panel1{
-  font-size: 18px;
-}
 </style>

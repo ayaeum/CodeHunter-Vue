@@ -21,8 +21,8 @@
         <p style="padding: 0;margin-bottom: 5px;">【方法名】{{item.methodName}}</p>
         <p style="padding: 0;margin-bottom: 5px;">【开始位置】{{item.methodLine}}</p>
         <template style="position:relative;">
-          <a-textarea :disabled="true" style="background-color: #F0F2F5;color: black;overflow-y: hidden;overflow-x: scroll;" :rows="(item.methodCode.split('\r\n').length+3)"
-                      :value="codeParser(item.methodCode,item.methodLine)" />
+          <a-textarea :disabled="true" style="background-color: #F0F2F5;color: black;overflow-y: hidden;overflow-x: scroll;" :rows="(item.Code.split('\n').length+3)"
+                      :value="item.Code" />
         </template>
         <br/><br/><br/>
       </div>
@@ -36,7 +36,7 @@
 
 <script>
     export default {
-        name: "CloneDrawer",
+      name: "CloneDrawer",
       props:["visible","content"],
       data() {
         return {

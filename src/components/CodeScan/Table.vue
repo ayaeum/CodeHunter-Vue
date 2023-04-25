@@ -32,7 +32,7 @@
           },
           {
             key: '2',
-            name: '致命问题',
+            name: '强制问题',
             age: this.tableData[0].serious,
             tel: this.tableData[1].serious,
             phone: this.tableData[2].serious,
@@ -46,7 +46,7 @@
           },
           {
             key: '4',
-            name: '建议问题',
+            name: '推荐问题',
             age: this.tableData[0].propose,
             tel: this.tableData[1].propose,
             phone: this.tableData[2].propose,

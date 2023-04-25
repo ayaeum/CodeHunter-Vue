@@ -11,7 +11,7 @@
           <a-list-item style="width: 320px;height: 240px;position: relative;overflow: hidden" slot="renderItem" slot-scope="item, index">
             <!--删除图标-->
             <a-icon style="width: 30px;height: 30px;position: absolute;top: 22px;right: 10px;z-index: 100;" type="delete" v-on:click="deleteTask($event,item.taskName)" />
-            <a-card style="width: 280px;height: 220px;margin-left: 20px;position: absolute;	overflow-x: hidden;overflow-y: scroll;right: -7px;border-right: grey" :title="item.taskName" v-on:click="clickCard(item)">
+            <a-card style="cursor: pointer;width: 280px;height: 220px;margin-left: 20px;position: absolute;	overflow-x: hidden;overflow-y: scroll;right: -7px;border-right: grey" :title="item.taskName" v-on:click="clickCard(item)">
               <a-tag>仓库</a-tag>{{item.wareHouse}}{{item.platform}}<br/><br/>
               <a-tag>分支</a-tag>{{item.branch}}<br/><br/>
               <a-tag>语言</a-tag>{{item.language}}
@@ -369,3 +369,4 @@
     overflow: auto;
   }
 </style>
+

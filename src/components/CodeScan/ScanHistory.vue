@@ -2,7 +2,7 @@
   <div id="components-modal-demo-position">
     <a-modal
       :visible="Visible"
-      title="扫描历史"
+      title="扫描历史（仅保留最近12次记录）"
       centered
       width="60%"
       @ok="handleOk"
@@ -19,19 +19,19 @@
 
         <a-list-item slot="renderItem" slot-scope="item, index" >
           <a slot="actions" v-on:click="changeTask(item.id)">查看</a>
-          <a slot="actions">删除</a>
+<!--          <a slot="actions">删除</a>-->
           <a-list-item-meta :description="item.sqlresult">
             <a slot="title">{{ item.time }}  <a-icon type="pushpin" style="color: seagreen" v-if="item.id===value"/></a>
           </a-list-item-meta>
           <div style="width: 21%;font-size: x-small;text-align: center;">
             <div style="color: #cc0000;width: 33.3%;display: inline-block;">
-              严重问题<br/>{{item.serious}}
+              强制问题<br/>{{item.serious}}
             </div>
             <div style="color: #2f54eb;width: 33.3%;display: inline-block;">
               警告问题<br/>{{item.warn}}
             </div>
             <div style="color: seagreen;width: 33.3%;display: inline-block;">
-              建议问题<br/>{{item.propose}}
+              推荐问题<br/>{{item.propose}}
             </div>
           </div>
         </a-list-item>
@@ -126,13 +126,13 @@
             content.some(item=>{
               for(let key in item.result){
                 switch (item.result[key].level) {
-                  case "严重":
+                  case "强制":
                     that.data1[pos].serious+=item.result[key].result.length;
                     break;
                   case "警告":
                     that.data1[pos].warn+=item.result[key].result.length;
                     break;
-                  case "建议":
+                  case "推荐":
                     that.data1[pos].propose+=item.result[key].result.length;
                     break;
                 }

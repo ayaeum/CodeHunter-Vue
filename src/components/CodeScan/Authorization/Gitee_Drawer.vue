@@ -125,23 +125,23 @@
            */
           onSubmit(){
 
-            // var url = "/certificationManagementForm/addCertification";
-            // var parameter = {
-            //   sysUsername:JSON.parse(localStorage.getItem("pro__Login_Username")).value,
-            //   giteeAccount:this.form.fieldsStore.fields.email.value,
-            //   giteePassword:this.encryptedData(this.$store.state.publicKey,this.form.fieldsStore.fields.password.value),
-            //   clientId:this.form.fieldsStore.fields.Client_ID.value,
-            //   clientSecret:this.form.fieldsStore.fields.Client_Secret.value,
-            //   remarks:this.form.fieldsStore.fields.description.value,
-            //   identificationName:this.form.fieldsStore.fields.identificationName.value,
-            //   platform:"Gitee",
-            // }
-            // getAction(url,parameter).then((res) => {
-            //   if(res.message === "添加成功"){
-            //     this.$emit("change",res.result);
-            //     this.form = this.$form.createForm(this);
-            //   }
-            // })
+            var url = "/certificationManagementForm/addCertification";
+            var parameter = {
+              sysUsername:JSON.parse(localStorage.getItem("pro__Login_Username")).value,
+              giteeAccount:this.form.fieldsStore.fields.email.value,
+              giteePassword:this.encryptedData(this.$store.state.publicKey,this.form.fieldsStore.fields.password.value),
+              clientId:this.form.fieldsStore.fields.Client_ID.value,
+              clientSecret:this.form.fieldsStore.fields.Client_Secret.value,
+              remarks:this.form.fieldsStore.fields.description.value,
+              identificationName:this.form.fieldsStore.fields.identificationName.value,
+              platform:"Gitee",
+            }
+            getAction(url,parameter).then((res) => {
+              if(res.message === "添加成功"){
+                this.$emit("change",res.result);
+                this.form = this.$form.createForm(this);
+              }
+            })
           },
 
           check() {//字段检查

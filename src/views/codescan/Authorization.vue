@@ -34,9 +34,11 @@
       <a-drawer
         title="新增账号主体"
         width="520"
-        :closable="false"
+        :closable="true"
         :visible="visible"
-        @close="onClose"
+        :maskClosable="true"
+        @handleCancle="Close_Choose_Drawer"
+        @close="Close_Choose_Drawer"
       >
         <a-row :gutter="16">
           <a-col :span="6">

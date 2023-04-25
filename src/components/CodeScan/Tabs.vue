@@ -177,13 +177,13 @@
               //total
               for(let key in item.result){
                 switch (item.result[key].level) {
-                  case "严重":
+                  case "强制":
                     that.tableData[pos].serious+=item.result[key].result.length;
                     break;
                   case "警告":
                     that.tableData[pos].warn+=item.result[key].result.length;
                     break;
-                  case "建议":
+                  case "推荐":
                     that.tableData[pos].propose+=item.result[key].result.length;
                     break;
                 }
@@ -201,13 +201,13 @@
             content.some(item=>{
               for(let key in item.result){
                 switch (item.result[key].level) {
-                  case "严重":
+                  case "强制":
                     that.datasource2[pos].serious+=item.result[key].result.length;
                     break;
                   case "警告":
                     that.datasource2[pos].warn+=item.result[key].result.length;
                     break;
-                  case "建议":
+                  case "推荐":
                     that.datasource2[pos].propose+=item.result[key].result.length;
                     break;
                 }

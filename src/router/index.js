@@ -7,7 +7,7 @@ Vue.use(Router)
 const router = new Router({
   mode: 'history',
   base: process.env.BASE_URL,
-  // base:"/codehunter/",
+  // base:"/codehunter",
   scrollBehavior: () => ({ y: 0 }),
   routes: constantRouterMap
 })

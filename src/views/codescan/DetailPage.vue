@@ -174,7 +174,7 @@
         //启动扫描按钮
         StartScan(){
           var flag=0;
-          console.log(this.$refs.ScanScheme.check)
+          // console.log(this.$refs.ScanScheme.check)
           for(let item in this.$refs.ScanScheme.check){
             if(this.$refs.ScanScheme.check[item].checked===true){
               flag=1;

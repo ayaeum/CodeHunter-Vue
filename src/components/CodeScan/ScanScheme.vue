@@ -12,20 +12,37 @@
     <br /><br />
     <a-switch @change="onCheckedChange" v-model:checked="emailChecked"/>
     <p style="margin-left: 2%;display: inline-block;">邮件通知</p>
-    <a-icon type="question-circle" style="margin-left: 1%;display: inline-block;" />
+    <a-popover placement="topLeft">
+      <template slot="content">
+        <p>开启邮件通知后，系统会在扫描</p>
+        <p>完成后向右方指定邮箱推送结果</p>
+      </template>
+      <span slot="title">邮件通知</span>
+      <a-icon type="question-circle" style="margin-left: 1%;display: inline-block;" />
+    </a-popover>
     <a-select mode="tags" v-model:value="email" style="width: 60%;margin-left: 8%;" :token-separators="[',']" @change="handleChange">
     </a-select>
 
     <br />
+
     <a-switch @click="onCheckedChange"/>
     <p style="margin-left: 2%;display: inline-block;">自动触发</p>
-    <a-icon type="question-circle" style="margin-left: 1%;display: inline-block;" />
+    <a-popover placement="topLeft">
+      <template slot="content">
+        <p>开启自动触发后，系统会</p>
+        <p>在通过网络钩子在代码提</p>
+        <p>交、合并时触发一次扫描</p>
+      </template>
+      <span slot="title">自动触发</span>
+      <a-icon type="question-circle" style="margin-left: 1%;display: inline-block;" />
+    </a-popover>
+
 
     <br /><br />
     <a-button type="primary" @click="showModal">
       扫描方案配置
     </a-button>
-    <a-modal v-model="modalvisible" title="规约配置" width="50%"  @ok="handleOk">
+    <a-modal v-model="modalvisible" title="扫描方案" width="50%"  @ok="handleOk">
       <div style="position:relative;height: 500px;">
         <a-card v-for="(item) in StatuteList" :key="item.id" :title="item.name" style="width: 23%;border-radius: 5px;display: inline-block;margin-left: 2%;left: -2%;margin-top: 2%;top: -2%;">
           <a slot="extra" @click="showProtocolConfig(item)">配置</a>

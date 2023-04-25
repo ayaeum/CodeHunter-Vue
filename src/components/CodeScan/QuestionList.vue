@@ -85,6 +85,7 @@
             order:order,
           }
           getAction(url,parameter).then((res) => {
+            console.log(JSON.parse(res.result.javaruleresult));
             if(res.result!==null){
               this.resultList=JSON.parse(res.result.javaruleresult);
             }
@@ -100,6 +101,7 @@
         Look(item1){
           this.drawervisible=true;
           this.questionmessage = item1;
+          console.log(item1);
         },
 
         closedrawer(){

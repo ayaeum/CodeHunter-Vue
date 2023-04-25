@@ -38,6 +38,10 @@
         this.$EventBus.$on('loadScanCloneResult', (order)=>{
           this.loadScanCurResult(order);
         })
+        this.$EventBus.$on('loadScanResult', (order)=>{
+          this.loadScanCurResult(order);
+        })
+
       },
       methods:{
         loadScanCurResult(order){//加载扫描结果
@@ -60,6 +64,7 @@
         Look(item1){//查看问题
           this.drawervisible=true;
           this.questionmessage = item1;
+          console.log(item1)
         },
         closedrawer(){
           this.drawervisible = false;
