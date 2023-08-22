@@ -141,6 +141,7 @@
                 this.$emit("change",res.result);
                 this.form = this.$form.createForm(this);
               }
+              this.$message.info(res.message);
             })
           },
 

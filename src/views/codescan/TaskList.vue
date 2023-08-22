@@ -367,6 +367,14 @@
     min-height: 1000px;
     background-color: white;
     overflow: auto;
+    border-style: outset;
   }
 </style>
+
+
+
+
+
+
+
 

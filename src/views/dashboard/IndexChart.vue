@@ -8,7 +8,7 @@
           </a-tooltip>
           <div>
             <trend flag="up" style="margin-right: 16px;">
-              <span slot="term">周同比</span>
+              <span slot="term">找时间和课酬</span>
               12%
             </trend>
             <trend flag="down">

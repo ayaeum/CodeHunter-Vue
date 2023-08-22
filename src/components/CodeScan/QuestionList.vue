@@ -67,6 +67,8 @@
         })
       },
       methods:{
+
+
         accumulation(){
           this.resultList.forEach(item=>{
             var length=0;

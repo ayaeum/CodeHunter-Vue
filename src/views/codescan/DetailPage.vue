@@ -13,7 +13,7 @@
       <ScanHistory ref="ScanHistory" style="position: absolute;" :visible="ScanHistoryVisible" :id="1" @cancle="ScanHistoryCancel" @ok="ScanHistoryOk" @updateScanHistory="updateScanHistory"></ScanHistory>
 
       <div style="position: absolute;right: 5px;display: inline-block;">
-        <a-button type="primary" style="position: relative;margin-right: 5px;" v-on:click="showFileFilter">文件过滤</a-button>
+        <a-button type="primary" style="position: relative;margin-right: 5px;" v-on:click="showFileFilter" @click="call">文件过滤</a-button>
         <FileFilter ref="FileFilter" style="position: absolute;" :tree-data="taskNow" :visible="FileFilterVisible" @FileFilterOk="FileFilterOk" @FileFilterCancel="FileFilterCancel"></FileFilter>
 
         <a-button type="primary" style="position: relative;margin-right: 5px;" v-on:click="showScanScheme">扫描方案</a-button>
@@ -99,6 +99,9 @@
         ...mapState(["task"])
       },
       methods: {
+        call(){
+          console.log("sadasd");
+        },
         //切换任务按钮逻辑
         showSelectDialog(){
           this.SelectDialogVisible = true;
